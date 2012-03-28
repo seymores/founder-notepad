@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="codes">
+    <item>pitch</item>
+    <item>naming</item>
+    <item>problem</item>
+    <item>solution</item>
+    <item>secret_auce</item>
+    <item>technology</item>
+    <item>competitors</item>
+    <item>monetization</item>
+    <item>market_size</item>
+    <item>customer_cquisition</item>
+    <item>mvp</item>
+    <item>task</item>
+  </string-array>
+</resources>

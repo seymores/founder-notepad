@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="descriptions">
+    <item>_</item>
+    <item>_</item>
+    <item>Who is the Ideal Customer? Why does the problem persist? How is it solved today?</item>
+    <item>Product/Service Benefits you provide?</item>
+    <item>Unique Competitive Advantage</item>
+    <item>Platform/Language</item>
+    <item>Strength/Weaknesses? Reasons Customers will choose You?</item>
+    <item>Revenue Model? Pricing? Costs involved, profitability?</item>
+    <item>3 Key Market Assumptions? Addressable Market Size?</item>
+    <item>3 Channel Strategies? Cost per Strategy to hit MVP milestones?</item>
+    <item>Metric Target Milestones? Top 3 Features? Cost/Details?</item>
+    <item>_</item>
+  </string-array>
+</resources>

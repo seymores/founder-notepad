@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.founderapp"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="14"/>
+
+    <application
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" android:theme="@android:style/Theme.Holo.Light" android:hardwareAccelerated="true">
+        <activity
+            android:name=".FounderActivity"
+            android:label="@string/app_name" android:screenOrientation="sensorPortait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PitchActivity" android:screenOrientation="sensorPortait" android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name="NamingActivity" android:windowSoftInputMode="stateHidden" android:screenOrientation="sensorPortait"></activity>
+        <activity android:name="EditorActivity" android:windowSoftInputMode="stateHidden" android:screenOrientation="sensorPortait"></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="sections">
+    <item>Pitch</item>
+    <item>Naming</item>
+    <item>Problem</item>
+    <item>Solution</item>
+    <item>Secret Sauce</item>
+    <item>Technology</item>
+    <item>Top 3 Competitors</item>
+    <item>Monetization</item>
+    <item>Market Size</item>
+    <item>Customer Acquisition</item>
+    <item>Minimum Viable Product</item>
+    <item>Task List</item>
+  </string-array>
+</resources>

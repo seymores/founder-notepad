@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/LinearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Topic Editor"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#888"
+                android:textStyle="bold" android:drawableLeft="@drawable/content_new_attachment"/>
+
+            <TextView
+                android:id="@+id/extraText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Extrea text for description."
+                android:textAppearance="?android:attr/textAppearanceSmall" android:paddingLeft="6dp" android:textColor="@color/orange"/>
+
+            <EditText
+                android:id="@+id/company_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:inputType="textCapSentences|textMultiLine|textLongMessage"
+                android:nextFocusDown="@+id/developing_text" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/LinearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MY COMPANY"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/orange" android:textStyle="bold" android:paddingLeft="5dp"/>
+
+            <EditText
+                android:id="@+id/company_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Your kickass company name here"
+                android:nextFocusDown="@+id/developing_text" android:inputType="textCapSentences"/>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text=", IS DEVELOPING:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/blue" android:paddingLeft="5dp"/>
+
+            <EditText
+                android:id="@+id/developing_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="What is that stuff you working on?"
+                android:inputType="textCapSentences|textMultiLine"
+                android:nextFocusDown="@+id/offering_text" />
+
+            <TextView
+                android:id="@+id/TextView04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="DEFINE OFFERING:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/blue" android:paddingLeft="5dp"/>
+
+            <EditText
+                android:id="@+id/offering_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="…and"
+                android:inputType="textCapSentences|textMultiLine"
+                android:nextFocusDown="@+id/audience_text" />
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="DEFINE AUDIENCE:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/blue" android:paddingLeft="5dp"/>
+
+            <EditText
+                android:id="@+id/audience_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Who are you serving?"
+                android:inputType="textCapSentences|textMultiLine"
+                android:nextFocusDown="@+id/solution_text" />
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="SOLVE A PROBLEM:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/blue" android:paddingLeft="5dp"/>
+
+            <EditText
+                android:id="@+id/solution_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Your kickass solution"
+                android:inputType="textCapSentences|textMultiLine"
+                android:nextFocusDown="@+id/secret_sauce_text" />
+
+            <TextView
+                android:id="@+id/TextView03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="WITH SECRET SAUCE:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/blue" android:paddingLeft="5dp"/>
+
+            <EditText
+                android:id="@+id/secret_sauce_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Your advantage over others"
+                android:inputType="textCapSentences|textMultiLine"
+                android:nextFocusUp="@id/company_text" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
