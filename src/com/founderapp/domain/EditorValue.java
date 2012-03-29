@@ -1,14 +1,30 @@
 package com.founderapp.domain;
 
 import java.util.Date;
+import java.util.UUID;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "edit_values")
 public class EditorValue {
 
-	String id;
+	@DatabaseField(id = true)
+	String id = UUID.randomUUID().toString().replaceAll("-", "");
+	
+	@DatabaseField
 	String pitchId;
+	
+	@DatabaseField
 	String code;
+	
+	@DatabaseField
 	String value;
+	
+	@DatabaseField
 	Date lastUpdated;
+	
+	@DatabaseField
 	int version = 0;
 
 	

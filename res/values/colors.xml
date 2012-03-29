@@ -13,5 +13,6 @@
     <color name="green_light">#99CC00</color>
     <color name="purple_light">#AA66CC</color>
     <color name="blue_light">#33B5E5</color>
+    <color name="blue_lighter">#8AD5F0</color>
     
 </resources>

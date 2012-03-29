@@ -1,11 +1,20 @@
 package com.founderapp;
 
+import java.util.List;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+
+import com.founderapp.domain.DomainHelper;
+import com.founderapp.domain.Pitch;
 
 /**
  * 
@@ -25,6 +34,31 @@ public class FounderActivity extends ListActivity {
 		
 		adapter = new FounderListAdapter(this);
 		setListAdapter(adapter);
+		
+		getListView().setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Pitch p = (Pitch)adapter.getItem(position);
+				Intent act = new Intent(FounderActivity.this, PitchActivity.class);
+				Bundle b = new Bundle();
+
+				Log.d(TAG, " * Click " + position + ", pitch=" + p);
+
+				b.putSerializable("pitch", p);
+				act.putExtras(b);
+				startActivity(act);
+			}
+		});
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		List<Pitch> pitches = DomainHelper.loadPitches(this);
+		adapter.setPitches(pitches);
 	}
 
 	@Override

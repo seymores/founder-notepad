@@ -21,7 +21,7 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MY COMPANY"
+                android:text="MY COMPANY..."
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/orange" android:textStyle="bold" android:paddingLeft="5dp"/>
 
@@ -32,7 +32,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Your kickass company name here"
-                android:nextFocusDown="@+id/developing_text" android:inputType="textCapSentences"/>
+                android:nextFocusDown="@+id/developing_text" android:inputType="textCapSentences" android:textStyle="bold" android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/textView3"
@@ -41,7 +41,7 @@
                 android:layout_marginTop="18dp"
                 android:text=", IS DEVELOPING:"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/blue" android:paddingLeft="5dp"/>
+                android:textColor="@color/blue_lighter" android:paddingLeft="5dp"/>
 
             <EditText
                 android:id="@+id/developing_text"
@@ -60,7 +60,7 @@
                 android:layout_marginTop="18dp"
                 android:text="DEFINE OFFERING:"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/blue" android:paddingLeft="5dp"/>
+                android:textColor="@color/blue_lighter" android:paddingLeft="5dp"/>
 
             <EditText
                 android:id="@+id/offering_text"
@@ -79,7 +79,7 @@
                 android:layout_marginTop="20dp"
                 android:text="DEFINE AUDIENCE:"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/blue" android:paddingLeft="5dp"/>
+                android:textColor="@color/blue_lighter" android:paddingLeft="5dp"/>
 
             <EditText
                 android:id="@+id/audience_text"
@@ -98,7 +98,7 @@
                 android:layout_marginTop="18dp"
                 android:text="SOLVE A PROBLEM:"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/blue" android:paddingLeft="5dp"/>
+                android:textColor="@color/blue_lighter" android:paddingLeft="5dp"/>
 
             <EditText
                 android:id="@+id/solution_text"
@@ -117,7 +117,7 @@
                 android:layout_marginTop="15dp"
                 android:text="WITH SECRET SAUCE:"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/blue" android:paddingLeft="5dp"/>
+                android:textColor="@color/blue_lighter" android:paddingLeft="5dp"/>
 
             <EditText
                 android:id="@+id/secret_sauce_text"

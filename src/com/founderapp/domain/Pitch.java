@@ -1,17 +1,45 @@
 package com.founderapp.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
-public class Pitch {
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+@DatabaseTable(tableName = "pitch")
+public class Pitch implements Serializable {
+
+	private static final long serialVersionUID = 3528275926445908589L;
+
+	@DatabaseField(id = true)
+	String id = UUID.randomUUID().toString().replaceAll("-", "");
+	
+	@DatabaseField
 	String audience;
+	
+	@DatabaseField
 	String companyName;
+	
+	@DatabaseField
 	String developing;
-	String id;
+	
+	@DatabaseField
 	Date lastUpdated;
+	
+	@DatabaseField
 	String offering;
+	
+	@DatabaseField
 	String secretSauce;
+	
+	@DatabaseField
 	String solution;
+	
+	@DatabaseField
+	Boolean hasTask = false;
+
+	@DatabaseField
 	int version = 0;
 
 	public String getAudience() {
@@ -84,6 +112,14 @@ public class Pitch {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+	
+	public Boolean hasTask() {
+		return hasTask;
+	}
+
+	public void setHasTask(Boolean hasTask) {
+		this.hasTask = hasTask;
 	}
 
 	public String toString() {
