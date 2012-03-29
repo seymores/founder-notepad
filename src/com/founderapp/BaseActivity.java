@@ -1,8 +1,9 @@
 package com.founderapp;
 
+import org.ocpsoft.pretty.time.PrettyTime;
+
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,8 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+
 
 public abstract class BaseActivity extends Activity {
 	
@@ -35,7 +38,11 @@ public abstract class BaseActivity extends Activity {
 								R.drawable.collections_view_as_list
 								};
 	
-	int editorIndex = 0; 
+	int editorIndex = 0;
+	
+	private EditText editorText;
+	static PrettyTime prettyTime = new PrettyTime();
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,9 +54,10 @@ public abstract class BaseActivity extends Activity {
 		codes = getResources().getStringArray(R.array.codes);
 		
 		setContentView(R.layout.editor_activity);
+		editorText = (EditText)findViewById(R.id.editor_text);
 
 		setupNavigation();
-		setupTitleAndDescription();
+		refreshViews();
 	}
 	
 	@Override
@@ -58,7 +66,7 @@ public abstract class BaseActivity extends Activity {
 		getActionBar().setSelectedNavigationItem( editorIndex );
 	}
 
-	private void setupTitleAndDescription() {
+	private void refreshViews() {
 		TextView title = (TextView)findViewById(R.id.title);
 		TextView description = (TextView)findViewById(R.id.extraText);
 		
@@ -77,6 +85,8 @@ public abstract class BaseActivity extends Activity {
 			description.setText(desc);
 			description.setVisibility(View.VISIBLE);
 		}
+		
+		editorText.setText("");
 	}
 
 	private void setupNavigation() {
@@ -89,7 +99,6 @@ public abstract class BaseActivity extends Activity {
 		bar.setDisplayHomeAsUpEnabled(true);
 		bar.setDisplayShowTitleEnabled(false);
 		bar.setListNavigationCallbacks(adapter, naviListener);
-
 	}
 	
 	private ActionBar.OnNavigationListener naviListener = new ActionBar.OnNavigationListener() {
@@ -116,7 +125,7 @@ public abstract class BaseActivity extends Activity {
 			}
 
 			editorIndex = itemPosition;
-			setupTitleAndDescription();
+			refreshViews();
 
 			return false;
 		}
@@ -148,17 +157,6 @@ public abstract class BaseActivity extends Activity {
 	}
 	
 	protected void nextNoteAction() {
-//		Intent next = new Intent(this, EditorActivity.class);
-//		int nextIndex = editorIndex + 1;
-//		if (nextIndex >= codes.length) {
-//			// Display toast
-//			return;
-//		}
-//		
-//		if (nextIndex >= codes.length) nextIndex = 0;
-//		next.putExtra("editorIndex", nextIndex);
-//		startActivity(next);
-		
 		int nextIndex = editorIndex + 1;
 		if (nextIndex >= 11) nextIndex = editorIndex;
 		getActionBar().setSelectedNavigationItem(nextIndex);

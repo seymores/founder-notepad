@@ -1,9 +1,8 @@
 package com.founderapp;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,15 +12,19 @@ import android.view.MenuItem;
  * @author Teo Choong Ping
  * 
  */
-public class FounderActivity extends Activity {
+public class FounderActivity extends ListActivity {
 	
 	private static final String TAG = "FounderActivity";
-
+	private FounderListAdapter adapter ;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		adapter = new FounderListAdapter(this);
+		setListAdapter(adapter);
 	}
 
 	@Override
