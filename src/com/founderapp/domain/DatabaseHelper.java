@@ -63,7 +63,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	
 	public Dao<EditorValue, String> getEditorDao() throws SQLException {
 		if (editorDao == null) {
-			editorDao = getDao(Pitch.class);
+			editorDao = getDao(EditorValue.class);
 		}
 		return editorDao;
 	}

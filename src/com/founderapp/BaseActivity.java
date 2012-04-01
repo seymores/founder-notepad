@@ -1,5 +1,8 @@
 package com.founderapp;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ocpsoft.pretty.time.PrettyTime;
 
 import android.app.ActionBar;
@@ -15,6 +18,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+
+import com.founderapp.domain.DomainHelper;
+import com.founderapp.domain.EditorValue;
 
 
 public abstract class BaseActivity extends Activity {
@@ -39,7 +45,7 @@ public abstract class BaseActivity extends Activity {
 								};
 	
 	int editorIndex = 0;
-	
+	String pitchId;
 	private EditText editorText;
 	static PrettyTime prettyTime = new PrettyTime();
 	
@@ -48,7 +54,7 @@ public abstract class BaseActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		editorIndex = getIntent().getIntExtra("editorIndex", 0);
-		
+		pitchId = getIntent().getStringExtra("pitchId");
 		titles = getResources().getStringArray(R.array.sections);
 		descriptions = getResources().getStringArray(R.array.descriptions);
 		codes = getResources().getStringArray(R.array.codes);
@@ -65,7 +71,42 @@ public abstract class BaseActivity extends Activity {
 		super.onResume();
 		getActionBar().setSelectedNavigationItem( editorIndex );
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.note_menus, menu);
+		return true;
+	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			return true;
+		case R.id.next_note:
+			nextNoteAction();
+			return true;
+
+		case R.id.delete:
+			delete();
+			return true;
+			
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+
+	}
+	
+	protected void nextNoteAction() {
+		int nextIndex = editorIndex + 1;
+		if (nextIndex > 11) nextIndex = 1;
+		getActionBar().setSelectedNavigationItem(nextIndex);
+		
+	}
+	
 	private void refreshViews() {
 		TextView title = (TextView)findViewById(R.id.title);
 		TextView description = (TextView)findViewById(R.id.extraText);
@@ -88,7 +129,35 @@ public abstract class BaseActivity extends Activity {
 		
 		editorText.setText("");
 	}
+	
+	private void save() {
+		Log.d(TAG, " * Saving");
+		if (editorIndex == 0) return;
+		String code = codes[editorIndex];
+		String value = editorText.getText().toString();
+		if (value == null || "".equals(value.trim())) return;
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("pitchId", pitchId);
+		params.put("code", code);
+		params.put("value", value);
+		DomainHelper.saveEditorValue(this, params);
+		Log.d(TAG, " * Saved =" + params);
+	}
+	
+	private void load() {
+		String code = codes[editorIndex];
+		Log.d(TAG, " * Loading: " + code);
+		EditorValue val = DomainHelper.loadEditorValue(this, pitchId, code);
+		if (val == null) return;
+		editorText.setText(val.getValue());
+		Log.d(TAG, " * Loaded=" + val );
+	}
 
+	private void delete() {
+		Log.d(TAG, " * Deleting " + pitchId);
+//		DomainHelper.delete(this, pitchId);
+	}
+	
 	private void setupNavigation() {
 		SpinnerAdapter adapter = ArrayAdapter.createFromResource(this, 
 	    										R.array.sections, 
@@ -115,6 +184,7 @@ public abstract class BaseActivity extends Activity {
 						EditorActivity.class);
 				next.putExtra("editorIndex", itemPosition);
 				// next.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				next.putExtra("pitchId", pitchId);
 				startActivity(next);
 				return true;
 			}
@@ -124,44 +194,15 @@ public abstract class BaseActivity extends Activity {
 				return true;
 			}
 
+			save();
 			editorIndex = itemPosition;
+			
 			refreshViews();
+			load();
 
 			return false;
 		}
 		
 	};
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.note_menus, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			finish();
-			return true;
-		case R.id.next_note:
-			nextNoteAction();
-			return true;
-
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-
-	}
-	
-	protected void nextNoteAction() {
-		int nextIndex = editorIndex + 1;
-		if (nextIndex >= 11) nextIndex = editorIndex;
-		getActionBar().setSelectedNavigationItem(nextIndex);
-		
-	}
-	
 	
 }

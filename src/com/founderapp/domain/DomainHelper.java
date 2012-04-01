@@ -1,6 +1,7 @@
 package com.founderapp.domain;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,18 +31,12 @@ public class DomainHelper {
 		
 	}
 	
-	public static void savePitch(Context ctx, Map<String, String> pitch) {
-		
-	}
-	
 	public static void saveEditorValue(Context ctx, EditorValue edit) {
 		DatabaseHelper helper = new DatabaseHelper(ctx);
 		
 		try {
-			
 			Dao<EditorValue, String> dao = helper.getEditorDao();
 			dao.createOrUpdate(edit);
-			
 		} catch (Exception ex) {
 			Log.e(TAG, " Error saving Edit: " + ex.getMessage());
 		} finally {
@@ -50,7 +45,19 @@ public class DomainHelper {
 	}
 	
 	public static void saveEditorValue(Context ctx, Map<String, String> edit) {
-
+	
+		String pitchId = edit.get("pitchId");
+		String code = edit.get("code");
+		EditorValue val = loadEditorValue(ctx, pitchId, code);
+		if (val == null) {
+			val = new EditorValue();
+		}
+		val.setCode(code);
+		val.setPitchId(pitchId);
+		val.setValue(edit.get("value"));
+		val.setLastUpdated(new java.util.Date());
+		
+		saveEditorValue(ctx, val);
 	}
 
 	public static List<Pitch> loadPitches(Context ctx) {
@@ -61,8 +68,33 @@ public class DomainHelper {
 			= helper.getPitchDao().queryBuilder().orderBy("lastUpdated", false).query();
 		} catch (Exception e) {
 			Log.e(TAG, e.getMessage());
+		} finally {
+			helper.close();
 		}
 		return rs;
+	}
+
+	public static EditorValue loadEditorValue(Context ctx,
+			String pitchId, String code) {
+		
+		DatabaseHelper helper = new DatabaseHelper(ctx);
+		EditorValue val = null;
+		try {
+			
+			Dao<EditorValue, String> dao = helper.getEditorDao();
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("pitchId", pitchId);
+			params.put("code", code);
+			List<EditorValue> vals = dao.queryForFieldValues(params);
+			if (vals != null && vals.size() > 0)
+				val = vals.get(0);
+		} catch (Exception ex) {
+			Log.e(TAG, " Error loading Edit: " + ex.getMessage());
+		} finally {
+			helper.close();
+		}
+		
+		return val;
 	}
 	
 }

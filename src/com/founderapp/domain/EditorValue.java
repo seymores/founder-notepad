@@ -22,7 +22,7 @@ public class EditorValue {
 	String value;
 	
 	@DatabaseField
-	Date lastUpdated;
+	Date lastUpdated = new Date();
 	
 	@DatabaseField
 	int version = 0;
@@ -77,7 +77,8 @@ public class EditorValue {
 	}
 
 	public String toString() {
-		return code;
+		String r = code + "=" + value;
+		return r;
 	}
 
 }

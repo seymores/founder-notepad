@@ -27,6 +27,8 @@ public class PitchActivity extends BaseActivity {
 		setContentView(R.layout.new_note);
 	
 		thePitch = (Pitch)getIntent().getSerializableExtra("pitch");
+		pitchId = thePitch.getId();
+		
 		//Log.d(TAG, " --> Loaded " + thePitch );
 		
 		// -- Setup views
