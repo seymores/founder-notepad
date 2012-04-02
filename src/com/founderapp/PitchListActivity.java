@@ -21,7 +21,7 @@ import com.founderapp.domain.Pitch;
  * @author Teo Choong Ping
  * 
  */
-public class FounderActivity extends ListActivity {
+public class PitchListActivity extends ListActivity {
 	
 	private static final String TAG = "FounderActivity";
 	private FounderListAdapter adapter ;
@@ -41,7 +41,7 @@ public class FounderActivity extends ListActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Pitch p = (Pitch)adapter.getItem(position);
-				Intent act = new Intent(FounderActivity.this, PitchActivity.class);
+				Intent act = new Intent(PitchListActivity.this, PitchEditorActivity.class);
 				Bundle b = new Bundle();
 
 				Log.d(TAG, " * Click " + position + ", pitch=" + p);

@@ -10,7 +10,7 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name" android:theme="@android:style/Theme.Holo.Light" android:hardwareAccelerated="true">
         <activity
-            android:name=".FounderActivity"
+            android:name=".PitchListActivity"
             android:label="My Pitches" android:screenOrientation="sensorPortait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +21,7 @@
         <activity android:name=".PitchActivity" android:screenOrientation="sensorPortait" android:windowSoftInputMode="stateHidden" android:label="My Pitches"></activity>
         <activity android:name="NamingActivity" android:windowSoftInputMode="stateHidden" android:screenOrientation="sensorPortait"></activity>
         <activity android:name="EditorActivity" android:windowSoftInputMode="stateHidden" android:screenOrientation="sensorPortait"></activity>
+        <activity android:name="PitchEditorActivity" android:screenOrientation="sensorPortait" android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>
