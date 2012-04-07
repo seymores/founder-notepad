@@ -7,7 +7,7 @@ import java.util.UUID;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "pitch")
+@DatabaseTable(tableName = "pitches")
 public class Pitch implements Serializable {
 
 	private static final long serialVersionUID = 3528275926445908589L;
@@ -25,7 +25,7 @@ public class Pitch implements Serializable {
 	String developing;
 	
 	@DatabaseField
-	Date lastUpdated;
+	Date lastUpdated = new java.util.Date();
 	
 	@DatabaseField
 	String offering;
@@ -39,6 +39,9 @@ public class Pitch implements Serializable {
 	@DatabaseField
 	Boolean hasTask = false;
 
+	@DatabaseField
+	Boolean closed = false;
+	
 	@DatabaseField
 	int version = 0;
 
@@ -121,9 +124,18 @@ public class Pitch implements Serializable {
 	public void setHasTask(Boolean hasTask) {
 		this.hasTask = hasTask;
 	}
+	
+
+	public Boolean isClosed() {
+		return closed;
+	}
+
+	public void setClosed(Boolean closed) {
+		this.closed = closed;
+	}
 
 	public String toString() {
-		return companyName;
+		return companyName + "[" + id + "]";
 	}
 
 }
