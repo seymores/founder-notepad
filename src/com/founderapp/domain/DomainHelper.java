@@ -9,6 +9,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.DeleteBuilder;
 
 
 public class DomainHelper {
@@ -65,7 +66,8 @@ public class DomainHelper {
 		List<Pitch> rs = Collections.emptyList();
 		try {
 			rs 
-			= helper.getPitchDao().queryBuilder().orderBy("lastUpdated", false).query();
+			= helper.getPitchDao().queryBuilder().orderBy("lastUpdated", false)
+										.where().eq("closed", false).query();
 		} catch (Exception e) {
 			Log.e(TAG, e.getMessage());
 		} finally {
@@ -95,6 +97,24 @@ public class DomainHelper {
 		}
 		
 		return val;
+	}
+
+	public static void delete(Context ctx,	Pitch pitch) {
+		String pitchId = pitch.getId();
+		DatabaseHelper helper = new DatabaseHelper(ctx);
+		try {
+			
+			helper.getPitchDao().deleteById(pitchId);
+			DeleteBuilder<EditorValue, String> del = helper.getEditorDao().deleteBuilder();
+			del.where().eq("pitchId", pitchId);
+			del.delete();
+			
+		} catch (Exception e) {
+			Log.e(TAG,  e.getMessage());
+		} finally {
+			helper.close();
+		}
+		
 	}
 	
 }

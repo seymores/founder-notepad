@@ -18,10 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PitchActivity" android:screenOrientation="sensorPortait" android:windowSoftInputMode="stateHidden" android:label="My Pitches"></activity>
-        <activity android:name="NamingActivity" android:windowSoftInputMode="stateHidden" android:screenOrientation="sensorPortait"></activity>
-        <activity android:name="EditorActivity" android:windowSoftInputMode="stateHidden" android:screenOrientation="sensorPortait"></activity>
-        <activity android:name="PitchEditorActivity" android:screenOrientation="sensorPortait" android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name="PitchEditorActivity" android:screenOrientation="sensorPortait" android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
     </application>
 
 </manifest>

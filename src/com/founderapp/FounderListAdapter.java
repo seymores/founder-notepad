@@ -3,6 +3,8 @@ package com.founderapp;
 import java.util.Collections;
 import java.util.List;
 
+import org.ocpsoft.pretty.time.PrettyTime;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -17,6 +19,8 @@ import com.founderapp.domain.Pitch;
 public class FounderListAdapter extends BaseAdapter {
 
 	private List<Pitch> pitches = Collections.emptyList();
+	static PrettyTime prettyTime = new PrettyTime();
+	
 	private Context context;
 	private static Typeface titleFont; //Typeface.createFromAsset(getAssets(), "Chantelli_Antiqua.ttf");  
 	private static Typeface bodyFont;
@@ -88,7 +92,7 @@ public class FounderListAdapter extends BaseAdapter {
 			holder.extraText.setVisibility(View.VISIBLE);
 		}
 		holder.lastUpdate.setText( 
-				BaseActivity.prettyTime.format( pitch.getLastUpdated() ));
+				prettyTime.format( pitch.getLastUpdated() ));
 		
 		return convertView;
 	}

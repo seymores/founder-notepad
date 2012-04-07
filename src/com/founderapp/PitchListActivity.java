@@ -73,7 +73,7 @@ public class PitchListActivity extends ListActivity {
 		
 		switch (item.getItemId()) {
 		case R.id.add_new:
-			startActivity(new Intent(this, PitchActivity.class));
+			startActivity(new Intent(this, PitchEditorActivity.class));
 			return true;
 
 		default:
