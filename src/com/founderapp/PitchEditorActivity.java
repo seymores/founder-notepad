@@ -1,5 +1,7 @@
 package com.founderapp;
 
+import java.util.List;
+
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
 import android.app.AlertDialog;
@@ -18,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ShareActionProvider;
 
 import com.founderapp.domain.DomainHelper;
+import com.founderapp.domain.EditorValue;
 import com.founderapp.domain.Pitch;
 import com.viewpagerindicator.PageIndicator;
 
@@ -77,9 +80,19 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 		Intent intent=new Intent(android.content.Intent.ACTION_SEND);
 		intent.setType("text/plain");
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append(pitch.toShareTextContent());
 
+		
+		List<EditorValue> values = DomainHelper.loadEditorValues(this, pitch.getId());
+		
+		for (EditorValue val : values) {
+			sb.append(val.toShareTextContent());
+		}
+		
 		intent.putExtra(Intent.EXTRA_SUBJECT, pitch.getCompanyName());
-		intent.putExtra(Intent.EXTRA_TEXT, pitch.toShareTextContent());
+		intent.putExtra(Intent.EXTRA_TEXT, sb.toString());
 		
 		return intent;
 	}
@@ -140,8 +153,7 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 
 	@Override
 	public void onPageSelected(int index) {
-		Log.d(TAG, " # onPageSelected: " + index);
-		
+		Log.d(TAG, " # onPageSelected: " + index);	
 	}
 
 	@Override

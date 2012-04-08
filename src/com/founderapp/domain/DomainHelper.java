@@ -1,5 +1,6 @@
 package com.founderapp.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -115,6 +116,24 @@ public class DomainHelper {
 			helper.close();
 		}
 		
+	}
+
+	public static List<EditorValue> loadEditorValues(
+			Context ctx, String id) {
+		DatabaseHelper helper = new DatabaseHelper(ctx);
+		List<EditorValue> values = Collections.emptyList();
+		
+		try {
+			
+			values = helper.getEditorDao().queryForEq("pitchId", id);
+			Log.d(TAG, " >>>>> List of value >>>" + values.size() );
+		} catch (Exception e) {
+			Log.d(TAG, e.getMessage());
+		} finally {
+			helper.close();
+		}
+		
+		return values;
 	}
 	
 }
