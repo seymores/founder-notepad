@@ -5,6 +5,7 @@ What is Founder Notepad
 -------------------------
 Founder Notepad is your pitch index card editor with helpful section to arrange your startup plans. It is based on the successful Founder Institute format for pitching to investor.
 
+In short, this is your *Startup Editor*.
 
 Download
 -------------------------

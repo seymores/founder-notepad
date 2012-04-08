@@ -83,7 +83,7 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append(pitch.toShareTextContent());
-
+		sb.append("\n\n*** Details ***\n\n");
 		
 		List<EditorValue> values = DomainHelper.loadEditorValues(this, pitch.getId());
 		
