@@ -80,6 +80,7 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 
 		intent.putExtra(Intent.EXTRA_SUBJECT, pitch.getCompanyName());
 		intent.putExtra(Intent.EXTRA_TEXT, pitch.toShareTextContent());
+		
 		return intent;
 	}
 
