@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/preview" android:title="Preview" android:enabled="false"></item>
-    <item android:id="@+id/archive" android:title="Archive"></item>
-    
+
+    <item
+        android:id="@+id/preview"
+        android:enabled="false"
+        android:title="Preview" android:icon="@drawable/collections_view_as_list">
+    </item>
+    <item
+        android:id="@+id/share"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        android:showAsAction="ifRoom"
+        android:title="Share"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/archive"
+        android:title="Archive">
+    </item>
 
 </menu>

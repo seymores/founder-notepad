@@ -137,5 +137,24 @@ public class Pitch implements Serializable {
 	public String toString() {
 		return companyName + "[" + id + "]";
 	}
+	
+	public String toShareTextContent() {
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append("\n\n*Company Name*\n");
+		sb.append(companyName);
+		sb.append("\n\n*Is Developing*\n");
+		sb.append(developing);
+		sb.append("\n\n*Define Offering*\n");
+		sb.append(offering);
+		sb.append("\n\n*Audience*\n");
+		sb.append(audience);
+		sb.append("\n\n*Solve a Problem*\n");
+		sb.append(solution);
+		sb.append("\n\n*With Secret Sauce*\n");
+		sb.append(secretSauce);
+		
+		return sb.toString();
+	}
 
 }

@@ -5,6 +5,7 @@ import android.app.ActionBar.OnNavigationListener;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ShareActionProvider;
 
 import com.founderapp.domain.DomainHelper;
 import com.founderapp.domain.Pitch;
@@ -63,15 +65,34 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.note_menus, menu);
+		
+		MenuItem menuItem = menu.findItem(R.id.share);
+		ShareActionProvider mShareActionProvider = (ShareActionProvider) menuItem.getActionProvider();
+	    mShareActionProvider.setShareIntent(getShareIntentMethod());
+
 		return true;
 	}
 	
+	private Intent getShareIntentMethod() {
+		Intent intent=new Intent(android.content.Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+
+		intent.putExtra(Intent.EXTRA_SUBJECT, pitch.getCompanyName());
+		intent.putExtra(Intent.EXTRA_TEXT, pitch.toShareTextContent());
+		return intent;
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();
+			break;
+			
+		case R.id.share:
+			share();
 			break;
 
 		case R.id.archive:
@@ -83,6 +104,11 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 		}
 
 		return true;
+	}
+
+	private void share() {
+		Log.d(TAG, "Share");
+		
 	}
 
 	private void delete() {
