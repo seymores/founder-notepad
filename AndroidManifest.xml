@@ -11,7 +11,7 @@
         android:label="@string/app_name" android:theme="@android:style/Theme.Holo.Light" android:hardwareAccelerated="true">
         <activity
             android:name=".PitchListActivity"
-            android:label="My Pitches" android:screenOrientation="sensorPortait" android:theme="@style/MyThemeBlue">
+            android:screenOrientation="sensorPortait" android:theme="@style/MyThemeBlue">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

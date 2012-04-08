@@ -2,6 +2,9 @@ package com.founderapp;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -11,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.PopupMenu;
 
 import com.founderapp.domain.DomainHelper;
 import com.founderapp.domain.Pitch;
@@ -84,12 +86,28 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 	}
 
 	private void delete() {
-		//XXX Give warning before delete
 		Log.d(TAG, " * Deleting " + pitch);
-
-		pitch.setClosed(true);
-		DomainHelper.savePitch(this, pitch);
-		finish();
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Archive Pitch Content");
+		builder.setMessage("Really remove this pitch?");
+		builder.setPositiveButton("OK", new OnClickListener() {
+            public void onClick(DialogInterface dialog, int arg1) {
+            	pitch.setClosed(true);
+        		DomainHelper.savePitch(PitchEditorActivity.this, pitch);
+        		finish();
+                dialog.dismiss();
+        }});
+		builder.setNegativeButton("Cancel", new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				
+			}
+		});
+		builder.show();
+		return;
 	}
 
 	@Override
