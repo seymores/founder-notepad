@@ -106,6 +106,7 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 				
 			}
 		});
+		
 		builder.show();
 		return;
 	}

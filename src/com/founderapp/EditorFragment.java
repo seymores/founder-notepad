@@ -119,9 +119,7 @@ public class EditorFragment extends Fragment implements OnFocusChangeListener {
 		if (pitchId == null) {
 			pitchId = PitchEditorActivity.pitch.getId();
 			if (pitchId == null) {
-				
-				//XXX Display alert;
-				
+
 				return;
 			}
 		}
@@ -130,6 +128,12 @@ public class EditorFragment extends Fragment implements OnFocusChangeListener {
 		params.put("code", code);
 		params.put("value", value);
 		DomainHelper.saveEditorValue(getActivity(), params);
+		
+		if ("task".equalsIgnoreCase(code)) {
+			//XXX This is fcking ugly
+			PitchEditorActivity.pitch.setHasTask(true);
+			DomainHelper.savePitch(getActivity(), PitchEditorActivity.pitch);
+		}
 		Log.d(TAG, " * Saved =" + params);
 	}
 	
