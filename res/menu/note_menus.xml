@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/jump_to" android:title="Jump" android:icon="@drawable/device_access_storage" android:visible="true" android:showAsAction="ifRoom"></item>
     <item android:id="@+id/preview" android:title="Preview" android:enabled="false"></item>
     <item android:id="@+id/archive" android:title="Archive"></item>
     

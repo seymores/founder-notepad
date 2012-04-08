@@ -8,6 +8,7 @@
     <color name="title">#444</color>
     <color name="green">#669900</color>
     <color name="grey">#e5e5e5</color>
+     <color name="white">#fff</color>
     <color name="yellow">#FFBB33</color>
     <color name="red_light">#FF4444</color>
     <color name="green_light">#99CC00</color>

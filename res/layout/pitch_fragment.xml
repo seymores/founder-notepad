@@ -32,7 +32,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Your kickass company name here"
-                android:nextFocusDown="@+id/developing_text" android:inputType="textCapSentences" android:textStyle="bold" android:textSize="20sp"/>
+                android:nextFocusDown="@+id/developing_text" android:inputType="textCapWords|textCapSentences" android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/textView3"

@@ -1,5 +1,7 @@
 package com.founderapp;
 
+import android.app.ActionBar;
+import android.app.ActionBar.OnNavigationListener;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -8,13 +10,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.PopupMenu;
 
 import com.founderapp.domain.DomainHelper;
 import com.founderapp.domain.Pitch;
 import com.viewpagerindicator.PageIndicator;
 
 
-public class PitchEditorActivity extends FragmentActivity implements OnPageChangeListener {
+public class PitchEditorActivity extends FragmentActivity implements OnPageChangeListener, OnNavigationListener {
 		
 	private static final String TAG = "PitchEditorActivity";
 	protected static Pitch pitch;
@@ -27,6 +31,14 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 	public void onCreate(Bundle bundleInstance) {
 		super.onCreate(bundleInstance);
 		setContentView(R.layout.pitch_editor_activity);
+		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		ArrayAdapter<CharSequence> list = ArrayAdapter
+			    .createFromResource(this, R.array.sections, android.R.layout.simple_dropdown_item_1line);
+		list.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		getActionBar().setListNavigationCallbacks(list, this);
+
 		
 		pitch = (Pitch) getIntent().getSerializableExtra("pitch"); 
 		
@@ -58,19 +70,17 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();
-			return true;
-		case R.id.jump_to:
-			
-			return true;
+			break;
 
 		case R.id.archive:
 			delete();
-			return true;
+			break;
 			
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 
+		return true;
 	}
 
 	private void delete() {
@@ -98,6 +108,13 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 	public void onPageScrolled(int arg0, float arg1, int arg2) {
 		//Log.d(TAG, " ** onPageScrolled: " + arg0 + ", float=" + arg1 + ", arg2=" + arg2);
 		/* do nothing */
+	}
+
+	@Override
+	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+		Log.d(TAG, "  >>> item position: " + itemPosition);
+		pager.setCurrentItem(itemPosition, true);
+		return false;
 	}
 	
 }
