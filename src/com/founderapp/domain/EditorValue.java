@@ -83,7 +83,7 @@ public class EditorValue {
 
 	public String toShareTextContent() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("\n\n#" + code + "#\n");
+		sb.append("\n\n###" + code + "###\n");
 		sb.append(value);		
 		return sb.toString();
 	}

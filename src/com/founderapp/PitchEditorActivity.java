@@ -82,8 +82,9 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 		
 		StringBuffer sb = new StringBuffer();
+		sb.append("#Founder Notepad - " + pitch.getCompanyName() + "#\n\n");
 		sb.append(pitch.toShareTextContent());
-		sb.append("\n\n*** Details ***\n\n");
+		sb.append("\n\n#Details#\n");
 		
 		List<EditorValue> values = DomainHelper.loadEditorValues(this, pitch.getId());
 		
