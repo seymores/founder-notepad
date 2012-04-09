@@ -55,9 +55,6 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 		pager.setAdapter(pagerAdapter);
 		pager.setOnPageChangeListener(this);
 		
-//		indicator = (CirclePageIndicator) findViewById(R.id.indicator);
-//		indicator.setViewPager(pager);
-		
 		String title = "New Pitch";
 		if (pitch != null) title = pitch.getCompanyName();
 		setTitle( title );
@@ -76,38 +73,12 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 		return true;
 	}
 	
-	private Intent getShareIntentMethod() {
-		Intent intent=new Intent(android.content.Intent.ACTION_SEND);
-		intent.setType("text/plain");
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-		
-		StringBuffer sb = new StringBuffer();
-		sb.append("#Founder Notepad - " + pitch.getCompanyName() + "#\n\n");
-		sb.append(pitch.toShareTextContent());
-		sb.append("\n\n#Details#\n");
-		
-		List<EditorValue> values = DomainHelper.loadEditorValues(this, pitch.getId());
-		
-		for (EditorValue val : values) {
-			sb.append(val.toShareTextContent());
-		}
-		
-		intent.putExtra(Intent.EXTRA_SUBJECT, pitch.getCompanyName());
-		intent.putExtra(Intent.EXTRA_TEXT, sb.toString());
-		
-		return intent;
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();
-			break;
-			
-		case R.id.share:
-			share();
 			break;
 
 		case R.id.archive:
@@ -121,11 +92,32 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 		return true;
 	}
 
-	private void share() {
-		Log.d(TAG, "Share");
-		
+	@Override
+	public void onPageSelected(int index) {
+		Log.d(TAG, " # onPageSelected: " + index);
+		getActionBar().setSelectedNavigationItem(index);
 	}
 
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		//	Log.d(TAG, " XX onPageScrollStateChanged: " + arg0);
+		/* do nothing much here */
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		//Log.d(TAG, " ** onPageScrolled: " + arg0 + ", float=" + arg1 + ", arg2=" + arg2);
+		/* do nothing */
+	}
+
+	@Override
+	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+		Log.d(TAG, "  >>> item position: " + itemPosition);
+		pager.setCurrentItem(itemPosition, true);
+		return false;
+	}
+
+	/* Remove/archive the pitch */
 	private void delete() {
 		Log.d(TAG, " * Deleting " + pitch);
 		
@@ -151,29 +143,27 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 		builder.show();
 		return;
 	}
-
-	@Override
-	public void onPageSelected(int index) {
-		Log.d(TAG, " # onPageSelected: " + index);	
-	}
-
-	@Override
-	public void onPageScrollStateChanged(int arg0) {
-		//	Log.d(TAG, " XX onPageScrollStateChanged: " + arg0);
-		/* do nothing much here */
-	}
-
-	@Override
-	public void onPageScrolled(int arg0, float arg1, int arg2) {
-		//Log.d(TAG, " ** onPageScrolled: " + arg0 + ", float=" + arg1 + ", arg2=" + arg2);
-		/* do nothing */
-	}
-
-	@Override
-	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-		Log.d(TAG, "  >>> item position: " + itemPosition);
-		pager.setCurrentItem(itemPosition, true);
-		return false;
-	}
 	
+	private Intent getShareIntentMethod() {
+		Intent intent=new Intent(android.content.Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("#Founder Notepad - " + pitch.getCompanyName() + "#\n\n");
+		sb.append(pitch.toShareTextContent());
+		sb.append("\n\n#Details#\n");
+		
+		List<EditorValue> values = DomainHelper.loadEditorValues(this, pitch.getId());
+		
+		for (EditorValue val : values) {
+			sb.append(val.toShareTextContent());
+		}
+		
+		intent.putExtra(Intent.EXTRA_SUBJECT, pitch.getCompanyName());
+		intent.putExtra(Intent.EXTRA_TEXT, sb.toString());
+		
+		return intent;
+	}
+
 }
