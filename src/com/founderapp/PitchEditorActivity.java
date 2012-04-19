@@ -65,8 +65,12 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.note_menus, menu);
-		
+				
 		MenuItem menuItem = menu.findItem(R.id.share);
+		if (pitch == null) {
+			menuItem.setEnabled(false);
+			return true;
+		}
 		ShareActionProvider mShareActionProvider = (ShareActionProvider) menuItem.getActionProvider();
 	    mShareActionProvider.setShareIntent(getShareIntentMethod());
 
@@ -135,8 +139,7 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-				
+				dialog.dismiss();	
 			}
 		});
 		
@@ -145,13 +148,17 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 	}
 	
 	private Intent getShareIntentMethod() {
-		Intent intent=new Intent(android.content.Intent.ACTION_SEND);
+		Intent intent = new Intent(android.content.Intent.ACTION_SEND);
 		intent.setType("text/plain");
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+		String name = "(Name Me)";
+		if (pitch != null) 
+			name = pitch.getCompanyName();
 		
 		StringBuffer sb = new StringBuffer();
-		sb.append("#Founder Notepad - " + pitch.getCompanyName() + "#\n\n");
-		sb.append(pitch.toShareTextContent());
+		sb.append("#Founder Notepad - " + name + "#\n\n");
+		if (pitch != null)
+			sb.append(pitch.toShareTextContent());
 		sb.append("\n\n#Details#\n");
 		
 		List<EditorValue> values = DomainHelper.loadEditorValues(this, pitch.getId());
@@ -160,7 +167,7 @@ public class PitchEditorActivity extends FragmentActivity implements OnPageChang
 			sb.append(val.toShareTextContent());
 		}
 		
-		intent.putExtra(Intent.EXTRA_SUBJECT, pitch.getCompanyName());
+		intent.putExtra(Intent.EXTRA_SUBJECT, name);
 		intent.putExtra(Intent.EXTRA_TEXT, sb.toString());
 		
 		return intent;
